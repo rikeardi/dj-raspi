@@ -14,7 +14,7 @@ COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
-COPY ./DJraspi/ /code/
+COPY ./DJraspi/* /code/
 
 # Run start.sh
 CMD ["/code/start.sh"]
