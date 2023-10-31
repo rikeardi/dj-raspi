@@ -1,6 +1,8 @@
 # Use an official Python runtime as a parent image
 FROM arm64v8/python:3.12-alpine
 
+RUN apk add --no-cache bash openssl
+
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
