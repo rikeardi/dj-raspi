@@ -15,7 +15,7 @@ def main():
     # Add service host info
     listen = os.environ.get("LISTEN", "0.0.0.0")
     port = os.environ.get("PORT", 8000)
-    allowed_hosts = os.environ.get("ALLOWED_HOSTS", ["*"])
+    allowed_hosts = os.environ.get("ALLOWED_HOSTS", "*")
     
     # Create config.yml from jinja2 template
     config_template = jinja2.Template(open(f"config.yml.j2").read())
