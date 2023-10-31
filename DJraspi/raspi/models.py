@@ -183,6 +183,25 @@ class RaspberryPi(models.Model):
         self.pins.add(Pin(number=38, name="GPIO20", mode="GPIO"))
         self.pins.add(Pin(number=39, name="Ground", mode="Power"))
         self.pins.add(Pin(number=40, name="GPIO21", mode="GPIO"))
+        
+        serialport = SerialPort(name="Serial")
+        serialport.pins.add(Pin.objects.get(number=8))
+        serialport.pins.add(Pin.objects.get(number=10))
+        self.ports.add(serialport)
+        
+        i2cport = I2CPort(name="I2C")
+        i2cport.pins.add(Pin.objects.get(number=3))
+        i2cport.pins.add(Pin.objects.get(number=5))
+        self.ports.add(i2cport)
+        
+        spiport = SPIPort(name="SPI0")
+        spiport.pins.add(Pin.objects.get(number=19))
+        spiport.pins.add(Pin.objects.get(number=21))
+        spiport.pins.add(Pin.objects.get(number=23))
+        spiport.pins.add(Pin.objects.get(number=24))
+        spiport.pins.add(Pin.objects.get(number=26))
+        self.ports.add(spiport)
+        
 
     def __str__(self):
         return self.name
