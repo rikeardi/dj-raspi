@@ -33,13 +33,15 @@ def main():
         f.write(config)
 
     # Add config to environment
-    os.environ["ADMIN_USER"] = admin_user
-    os.environ["ADMIN_PASSWORD"] = admin_password
-    os.environ["SECRET_KEY"] = secret_key
-    os.environ["LISTEN"] = listen
-    os.environ["PORT"] = port
-    os.environ["ALLOWED_HOSTS"] = allowed_hosts
-    
+    env = {
+        "ADMIN_USER": admin_user,
+        "ADMIN_PASSWORD": admin_password,
+        "SECRET_KEY": secret_key,
+        "ALLOWED_HOSTS": allowed_hosts,
+        "LISTEN": listen,
+        "PORT": port,
+    }
+    os.environ.update(env)   
     print("Config file written to config/config.yml")
     print(f"Open the service from your browser at http://localhost:{port}/")
     print(f"Login with username: {admin_user} and password: {admin_password}")
