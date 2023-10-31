@@ -35,6 +35,7 @@ def main():
     # Add config to environment
     env = {
         "ADMIN_USER": admin_user,
+        "ADMIN_EMAIL": f"{admin_user}@localhost",
         "ADMIN_PASSWORD": admin_password,
         "SECRET_KEY": secret_key,
         "ALLOWED_HOSTS": allowed_hosts,

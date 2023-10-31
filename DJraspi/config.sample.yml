@@ -5,8 +5,9 @@
 secret_key: "change_me_20u4r9mrbpv39uw84gjbip9osr98jtafl3eijöakweg"
 
 # Super user
-username: "admin"
-password: "password"
+admin_user: "admin"
+admin_email: "admin@localhost"
+admin_password: "password"
 
 # Service host
 listen: "0.0.0.0"
