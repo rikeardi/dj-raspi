@@ -10,7 +10,7 @@ def main():
     
     # Create user
     admin_user = os.environ.get("ADMIN_USER", "raspiadmin")
-    admin_password = os.environ.get("ADMIN_PASSWORD", os.urandom(128).hex())
+    admin_password = os.environ.get("ADMIN_PASSWORD", os.urandom(10).hex())
     
     # Add service host info
     listen = os.environ.get("LISTEN", "0.0.0.0")
