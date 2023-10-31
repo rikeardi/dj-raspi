@@ -13,6 +13,8 @@ COPY requirements.txt /code/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+VOLUME ["/code/SECRET_KEY.txt"]
+
 # Copy project
 COPY ./DJraspi/* /code/
 
