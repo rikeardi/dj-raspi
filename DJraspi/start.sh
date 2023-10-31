@@ -3,12 +3,12 @@
 # Check if secret.txt exists
 if [ ! -f "/code/config/config.yml" ]; then
     python config.py
-    sudo export $(grep -v '^#' /code/config/.env | xargs)
+    export $(grep -v '^#' /code/config/.env | xargs)
     python manage.py makemigrations --noinput
     python manage.py migrate
     python manage.py createsuperuser --noinput
 else
-    sudo export $(grep -v '^#' /code/config/.env | xargs)
+    export $(grep -v '^#' /code/config/.env | xargs)
     python manage.py makemigrations --noinput
     python manage.py migrate
 fi
