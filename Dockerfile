@@ -10,9 +10,8 @@ WORKDIR /code
 
 # Install dependencies
 COPY requirements.txt /code/
-RUN python -m pip install --upgrade pip && \
-#pip install --upgrade pip
-    pip install -r requirements.txt
+RUN 'pip install --upgrade pip' && \
+    'pip install -r requirements.txt'
 
 # Copy project
 COPY ./DJraspi/ /code/
