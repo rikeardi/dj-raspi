@@ -41,7 +41,10 @@ def main():
         "LISTEN": listen,
         "PORT": port,
     }
-    os.environ.update(env)   
+    with open(f"{path}/.env", "w+") as f:
+        for k, v in env.items():
+            f.write(f"{k}={v}\n")
+    os.system(f"env > {path}/.env")
     print("Config file written to config/config.yml")
     print(f"Open the service from your browser at http://localhost:{port}/")
     print(f"Login with username: {admin_user} and password: {admin_password}")
