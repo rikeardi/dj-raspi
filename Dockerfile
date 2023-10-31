@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 VOLUME ["/code/config"]
 
 # Copy project
-COPY ./DJraspi/* /code/
+COPY . /code/
 
 # Run start.sh
 CMD ["start.sh"]
