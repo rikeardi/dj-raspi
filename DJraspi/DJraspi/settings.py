@@ -16,8 +16,7 @@ import yaml
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 _configfile = BASE_DIR / "config/config.yml"
-with open(_configfile) as f:
-    config = yaml.safe_load(f)
+config = yaml.safe_load(open(_configfile))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
