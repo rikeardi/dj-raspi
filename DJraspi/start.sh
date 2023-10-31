@@ -1,17 +1,15 @@
 #!/bin/sh
 
 # Check if secret.txt exists
-if [ ! -f "/code/secret/SECRET_KEY.txt" ]; then
-    echo $(openssl rand -base64 32) > /code/secret/SECRET_KEY.txt
+if [ ! -f "/code/config/config.yml" ]; then
+    python config.py
+    python manage.py makemigrations --noinput
+    python manage.py migrate
+    python manage.py createsuperuser --noinput
+else
+    python manage.py makemigrations --noinput
+    python manage.py migrate
 fi
 
-export SECRET_KEY=$(cat /code/secret/SECRET_KEY.txt)
-
-# Make migrations
-python manage.py makemigrations
-
-# Apply migrations
-python manage.py migrate
-
 # Start server
-python manage.py runserver
+python manage.py runserver ${LISTEN}:${PORT}

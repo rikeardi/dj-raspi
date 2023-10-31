@@ -12,7 +12,7 @@ class InvalidReadingError(Exception):
 
 
 class Input(models.Model):
-    id = models.IntegerField()
+    gpio = models.IntegerField(blank=True, null=True)
     name = models.CharField(max_length=200)
     
     class Meta:
@@ -28,12 +28,13 @@ class Input(models.Model):
 class OneWire(Input):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.id = kwargs.pop('gpio')
 
 
 class Sensor(models.Model):
     name = models.CharField(max_length=200)
     values = models.ManyToManyField('SensorValue')
+    sensor = Any
+    type = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -66,9 +67,12 @@ class DHT22(Sensor):
     sensor = None
     input = models.ForeignKey(OneWire, on_delete=models.CASCADE)
     
+    class Meta:
+        verbose_name = "DHT22"
+        verbose_name_plural = "DHT22s"
+    
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        self.input = OneWire(gpio=kwargs.pop('gpio'))
-        self.sensor = DHT22(self.input.id())
+        self.sensor = DHT22(self.input.gpio)
         self.values = [
             SensorValue(name="Temperature", type=float),
             SensorValue(name="Humidity", type=float)

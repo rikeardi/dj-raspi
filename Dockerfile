@@ -15,7 +15,7 @@ COPY requirements.txt /code/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-VOLUME ["/code/secret"]
+VOLUME ["/code/config"]
 
 # Copy project
 COPY ./DJraspi/* /code/
