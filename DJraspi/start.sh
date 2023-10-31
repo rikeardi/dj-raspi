@@ -6,7 +6,7 @@ if [ ! -f "/code/config/config.yml" ]; then
     export $(grep -v '^#' /code/config/.env | xargs)
     python manage.py makemigrations --noinput
     python manage.py migrate
-    python manage.py createsuperuser --noinput --username ${ADMIN_USERNAME} --email ${ADMIN_EMAIL}
+    python manage.py createsuperuser --noinput --username ${ADMIN_USER} --email ${ADMIN_EMAIL}
 else
     export $(grep -v '^#' /code/config/.env | xargs)
     python manage.py makemigrations --noinput
