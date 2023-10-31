@@ -13,9 +13,8 @@ COPY requirements.txt /code/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-RUN python manage.py makemigrations && \
-    python manage.py migrate && \
-    python manage.py collectstatic --noinput
-
 # Copy project
 COPY ./DJraspi/ /code/
+
+# Run start.sh
+CMD ["start.sh"]
