@@ -3,6 +3,7 @@ import asyncio
 import os
 from pigpio_dht import DHT22
 from django.db import models
+from polymorphic.models import PolymorphicModel
 
 
 # Create your models here.
@@ -21,7 +22,7 @@ class Pin(models.Model):
         return self.name + ": " + str(self.number)
 
 
-class Input(models.Model):
+class Input(PolymorphicModel):
     pin = models.ForeignKey(Pin, on_delete=models.CASCADE)
     gpio = models.IntegerField(blank=True, null=True)
     name = models.CharField(max_length=200)
@@ -40,7 +41,7 @@ class OneWire(Input):
     pass
 
 
-class Port(models.Model):
+class Port(PolymorphicModel):
     pins = models.ManyToManyField(Pin)
     name = models.CharField(max_length=200)
     
@@ -70,7 +71,7 @@ class PWMPort(Port):
     pass
 
 
-class Sensor(models.Model):
+class Sensor(PolymorphicModel):
     name = models.CharField(max_length=200)
     values = models.ManyToManyField('SensorValue')
     sensor = Any
