@@ -23,8 +23,9 @@ def main():
         secret_key=secret_key,
         admin_user=admin_user,
         admin_password=admin_password,
-        allowed_hosts=allowed_hosts,
+        listen=listen,
         port=port,
+        allowed_hosts=allowed_hosts,
     )
     
     # Write config.yml
@@ -35,8 +36,9 @@ def main():
     os.environ["ADMIN_USER"] = admin_user
     os.environ["ADMIN_PASSWORD"] = admin_password
     os.environ["SECRET_KEY"] = secret_key
-    os.environ["ALLOWED_HOSTS"] = allowed_hosts
+    os.environ["LISTEN"] = listen
     os.environ["PORT"] = port
+    os.environ["ALLOWED_HOSTS"] = allowed_hosts
 
 
 if __name__ == "__main__":
