@@ -39,6 +39,10 @@ def main():
     os.environ["LISTEN"] = listen
     os.environ["PORT"] = port
     os.environ["ALLOWED_HOSTS"] = allowed_hosts
+    
+    print("Config file written to config/config.yml")
+    print(f"Open the service from your browser at http://localhost:{port}/")
+    print(f"Login with username: {admin_user} and password: {admin_password}")
 
 
 if __name__ == "__main__":
