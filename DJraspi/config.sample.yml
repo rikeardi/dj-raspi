@@ -2,13 +2,13 @@
 # DJ-Raspi config file #
 ########################
 
-secret_key: change_me_20u4r9mrbpv39uw84gjbip9osr98jtafl3eijöakweg
+secret_key: "change_me_20u4r9mrbpv39uw84gjbip9osr98jtafl3eijöakweg"
 
 # Super user
-username: admin
-password: password
+username: "admin"
+password: "password"
 
 # Service host
-listen: 0.0.0.0
-port: 8000
-allowed_hosts: *
+listen: "0.0.0.0"
+port: "8000"
+allowed_hosts: "*"
