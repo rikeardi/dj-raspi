@@ -45,7 +45,6 @@ def main():
         for k, v in env.items():
             f.write(f"{k}={v}\n")
     
-    
     print("Config file written to config/config.yml")
     print(f"Open the service from your browser at http://localhost:{port}/")
     print(f"Login with username: {admin_user} and password: {admin_password}")
