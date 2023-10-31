@@ -3,7 +3,6 @@
 # Check if secret.txt exists
 if [ ! -f "/code/secret/SECRET_KEY.txt" ]; then
     echo $(openssl rand -base64 32) > /code/secret/SECRET_KEY.txt
-    exit 1
 fi
 
 export SECRET_KEY=$(cat /code/secret/SECRET_KEY.txt)
