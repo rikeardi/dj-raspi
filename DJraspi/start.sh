@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Make migrations
 python manage.py makemigrations
