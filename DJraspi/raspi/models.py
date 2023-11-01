@@ -12,6 +12,23 @@ class InvalidReadingError(Exception):
         return super().__str__() + "Invalid reading"
 
 
+class SingletonModel(models.Model):
+    class Meta:
+        abstract = True
+    
+    def save(self, *args: Any, **kwargs: Any) -> None:
+        self.pk = 1
+        super().save(*args, **kwargs)
+    
+    def delete(self, *args: Any, **kwargs: Any) -> None:
+        pass
+    
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
+    
+
 class Pin(models.Model):
     number = models.IntegerField()
     name = models.CharField(max_length=200)
@@ -22,7 +39,7 @@ class Pin(models.Model):
         return self.name + ": " + str(self.number)
 
 
-class Input(PolymorphicModel):
+class Input(models.Model):
     pin = models.ForeignKey(Pin, on_delete=models.CASCADE)
     gpio = models.IntegerField(blank=True, null=True)
     name = models.CharField(max_length=200)
@@ -41,7 +58,7 @@ class OneWire(Input):
     pass
 
 
-class Port(PolymorphicModel):
+class Port(models.Model):
     pins = models.ManyToManyField(Pin)
     name = models.CharField(max_length=200)
     
@@ -71,7 +88,7 @@ class PWMPort(Port):
     pass
 
 
-class Sensor(PolymorphicModel):
+class Sensor(models.Model):
     name = models.CharField(max_length=200)
     values = models.ManyToManyField('SensorValue')
     sensor = Any
@@ -135,13 +152,13 @@ class DHT22(Sensor):
         pass
 
 
-class RaspberryPi(models.Model):
+class RaspberryPi(SingletonModel):
     name = models.CharField(max_length=200)
     model = models.CharField(max_length=200)
     pins = models.ManyToManyField(Pin)
-    inputs = models.ManyToManyField(Input)
+    #inputs = models.ManyToManyField(Input)
     ports = models.ManyToManyField(Port)
-    sensors = models.ManyToManyField(Sensor)
+    #sensors = models.ManyToManyField(Sensor)
     
     def fill(self):
         self.pins.add(Pin(number=1, name="3V3", mode="Power"))
