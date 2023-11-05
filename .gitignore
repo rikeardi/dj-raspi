@@ -1,5 +1,7 @@
+.venv/
+.conda/
 .env
 __pycache__/
 migrations/
-DJraspi/db.sqlite3
-DJraspi/config.yml
+config/
+data/

@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+  dj-raspi:
+    build: .
+    hostname: dj-raspi
+    ports:
+      - 8000:8000
+    volumes:
+      - ./config:/code/config
+      - ./data:/code/data
+    devices:
+      - /dev/gpiochip0:/dev/gpiochip0
+    environment:
+    # Use ./config/config.yml to set these values, or set them here
+      - SECRET_KEY=secret
+      - ADMIN_USER=raspiadmin
+      - ADMIN_PASSWORD=raspiadmin
+      - LISTEN=0.0.0.0
+      - PORT=8000
+      - ALLOWED_HOSTS="*"
+    restart: on-failure
+

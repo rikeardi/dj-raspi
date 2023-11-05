@@ -2,7 +2,7 @@ import jinja2
 import os
 
 
-path = "/code/config"
+path = "./config"
 
 def main():
     # Generate secret key
