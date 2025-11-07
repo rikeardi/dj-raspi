@@ -3,7 +3,7 @@ FROM arm64v8/python:3.12-alpine
 
 RUN apk add --no-cache bash 
 RUN apk add --no-cache pigpio --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
-RUN systemctl start pigpiod
+RUN rc-update add pigpiod
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
