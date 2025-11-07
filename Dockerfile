@@ -22,5 +22,7 @@ VOLUME ["/code/data"]
 # Copy project
 COPY DJraspi /code
 
+WORKDIR /code
+
 # Run start.sh
 CMD ["start.sh"]
