@@ -18,4 +18,5 @@ services:
       - PORT=8000
       - ALLOWED_HOSTS="*"
     restart: on-failure
+    net: host
 
