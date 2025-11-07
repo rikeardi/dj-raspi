@@ -1,10 +1,8 @@
 # Use an official Python runtime as a parent image
 FROM arm64v8/python:3.12-alpine
 
-RUN apk add libgdiplus --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
-RUN apk update
-
-RUN apk add --no-cache bash pigpio
+RUN apk add --no-cache bash 
+RUN apk add --no-cache pigpio --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
 RUN systemctl start pigpiod
 
 # Set environment variables
