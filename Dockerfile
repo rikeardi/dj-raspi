@@ -25,4 +25,4 @@ COPY DJraspi /code
 WORKDIR /code
 
 # Run start.sh
-CMD ["start.sh"]
+CMD ["/code/start.sh"]
