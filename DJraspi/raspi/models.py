@@ -1,12 +1,6 @@
-from collections.abc import Iterable
 from typing import Any
 import asyncio
-import os
 from django.db import models
-from single_instance_model import SingleInstanceModel
-
-from pigpio_dht import DHT22
-import Adafruit_BMP.BMP085 as dht_bmp
 
 
 # Create your models here.
@@ -148,64 +142,6 @@ class Sensor(models.Model):
 
     def read():
         pass
-        
-
-class DHT22(Sensor):
-    input = models.ForeignKey(OneWire, on_delete=models.CASCADE)
-    sensor_ptr = models.OneToOneField(Sensor, blank=True, default=None, on_delete=models.DO_NOTHING, parent_link=True)
-    Sensor._meta.get_field('type').default = "DHT22"
-    
-    class Meta:
-        verbose_name = "DHT22"
-        verbose_name_plural = "DHT22s"
-    
-    async def read(self):
-        try:
-            result = self.sensor.read()
-            if result['valid']:
-                self.values.add(SensorValue(name='Temperature', type='float', unit='°C', sensor=self, reading=Reading(reading=result['temp'])).save())
-                self.values.add(SensorValue(name='Humidity', type='float', unit='%', sensor=self, reading=Reading(reading=result['humidity'])).save())
-                self.save()
-            else:
-                raise InvalidReadingError
-        except Exception as e:
-            pass
-    
-    def start(self):
-        self.sensor = DHT22(self.input.gpio)
-        while True:
-            asyncio.run(self.read())
-            asyncio.sleep(self.interval)
-
-
-class BMP085(Sensor):
-    port = models.ForeignKey(I2CPort, on_delete=models.CASCADE)
-    address = models.IntegerField(default=0x77)
-    sensor_ptr = models.OneToOneField(Sensor, blank=True, default=None, on_delete=models.DO_NOTHING, parent_link=True)
-    Sensor._meta.get_field('type').default = "BMP085"
-    
-    class Meta:
-        verbose_name = "BMP085"
-        verbose_name_plural = "BMP085s"
-    
-    async def read(self):
-        try:
-            result = self.sensor.read()
-            if result['valid']:
-                self.values.add(SensorValue(name='Temperature', type='float', unit='°C', sensor=self, reading=Reading(reading=result['temp'])).save())
-                self.values.add(SensorValue(name='Pressure', type='float', unit='hPa', sensor=self, reading=Reading(reading=result['pressure'])).save())
-                self.values.add(SensorValue(name='Altitude', type='float', unit='m', sensor=self, reading=Reading(reading=result['altitude'])).save())
-                self.save()
-            else:
-                raise InvalidReadingError
-        except Exception as e:
-            pass
-    
-    def start(self):
-        self.sensor = dht_bmp.BMP085(address=self.address, busnum=self.port.name.split("I2C-")[1])
-        while True:
-            asyncio.run(self.read())
-            asyncio.sleep(self.interval)
 
 
 class SingletonModel(models.Model):
