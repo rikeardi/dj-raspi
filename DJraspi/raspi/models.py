@@ -1,5 +1,4 @@
 from typing import Any
-import asyncio
 from django.db import models
 
 
